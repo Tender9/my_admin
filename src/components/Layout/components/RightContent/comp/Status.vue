@@ -94,6 +94,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 5px;
+      background-color: #000;
+      color: #fff;
 
       .sys-time {
          margin-left: auto;

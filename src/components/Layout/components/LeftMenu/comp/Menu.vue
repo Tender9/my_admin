@@ -11,7 +11,7 @@
    </div>
 </template>
 <script setup>
-   import { useMenuStore } from "@/stores";
+   import { useMenuStore,useUserStore } from "@/stores";
    import { h, reactive } from "vue";
    import {
       MailOutlined,
@@ -35,6 +35,8 @@
    } from "@ant-design/icons-vue";
 
    const menuStore = useMenuStore();
+   const userStore = useUserStore();
+
 
    // 图标列表
    const icons = [
@@ -80,7 +82,7 @@
       let keyCounter = 1;
 
       // 生成一级菜单（10个）
-      for (let i = 1; i <= 10; i++) {
+      for (let i = 1; i <= 30; i++) {
          const hasChildren = Math.random() > 0.3; // 70%概率有子菜单
          let children = null;
 
@@ -126,7 +128,9 @@
    };
 
    // 创建响应式菜单数组
-   const items = reactive(generateMenus());
+   const items = reactive([...generateMenus(),...generateMenus()]);
+
+
    const state = reactive({
       rootSubmenuKeys: ["sub1", "sub2", "sub4"],
       openKeys: ["sub1"],
@@ -152,18 +156,13 @@
       width: 100%;
       height: 100%;
       overflow: auto;
-      // 隐藏滚动条（简化写法，兼容主流浏览器）
-      // &::-webkit-scrollbar {
-      //    display: none;
-      // }
-      // scrollbar-width: none;
    }
 
    .menu-page {
       width: $expanded-width;
       transition: $transition; // 添加过渡动画
       height: 100%;
-      overflow: hidden; // 防止内容溢出
+      overflow: hidden;
       &.collapsed {
          width: $collapsed-width; // 折叠状态的宽度
       }

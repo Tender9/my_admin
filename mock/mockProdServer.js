@@ -2,8 +2,10 @@
 
 import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer'
 
-import users from "./user.js";
+import users from "./user";
+
+const mockModules = [...users];
 
 export function setupProdMockServer() {
-   createProdMockServer([...users]);
+    createProdMockServer(mockModules);
 }

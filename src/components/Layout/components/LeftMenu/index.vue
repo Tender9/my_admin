@@ -8,7 +8,7 @@
 </script>
 
 <style lang="scss" scoped>
-   .left-menu {
-      width: fit-content;
-   }
+   // .left-menu {
+   //    width: fit-content;
+   // }
 </style>

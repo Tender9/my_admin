@@ -1,24 +1,31 @@
 <template>
    <!-- <div>11111111</div> -->
    <div>
-      <index>
+      <Layout>
          <template #content>内容如下</template>
-      </index>
+      </Layout>
    </div>
 </template>
 
 <script setup>
    import { ref, reactive, computed, watch, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, onErrorCaptured } from "vue";
-   import { login } from "@/api/user";
-   import index from "@/components/Layout/index.vue";
+   import Layout from "@/components/Layout/index.vue";
+   import { useUserStore } from "@/stores";
+   import { useRouter } from "vue-router";
+
+   let router = useRouter()
+   const userStore = useUserStore();
+
    const user = {
-      username: "admin",
+      username: "root",
       password: "123456",
    };
-   const headers = {
-      postId: "admin",
-   };
-   login(user, headers).then((res) => {});
+
+   const login = async () => await userStore.userLogin(user)
+ 
+   login()
+
+
 </script>
 
 <style scoped></style>

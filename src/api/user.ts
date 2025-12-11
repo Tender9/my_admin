@@ -1,4 +1,6 @@
-import req from "./config/request";
-import type { UserLogin, Headers } from "./user.type";
+import req from "../request";
+import type { UserLogin, Headers, ApiResponse } from "./type/user.type";
 
-export const login = (data: UserLogin, headers?: Headers) => req.post("/api/login", data, headers);
+export const login = (data: UserLogin, headers?: Headers): Promise<ApiResponse> => req.post("/api/login", data, headers);
+
+export const getUserInfo = (): Promise<ApiResponse> => req.get("/api/getUserInfo");

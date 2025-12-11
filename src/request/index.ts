@@ -10,6 +10,11 @@ const service = axios.create(config);
 
 const reqConfig = [
    (config: InternalAxiosRequestConfig) => {
+
+      const token = localStorage.getItem("TOKEN");
+
+      token && (config.headers.authorization = token);
+      
       return config;
    },
    (err: AxiosError) => {
@@ -20,7 +25,6 @@ const reqConfig = [
 const resConfig = [
    (response: AxiosResponse) => {
       const data = response.data;
-      console.log(response,'response');
       if (data.code != 200) Promise.reject(new Error(`业务错误：${data.message || data.code}`));
       return data;
    },

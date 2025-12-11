@@ -2,6 +2,7 @@
    width: 5px;
    height: 1px;
    background-color: transparent;
+   display: none; /* 👈 关键！ */
 }
 ::-webkit-scrollbar-thumb {
    border-radius: 5px;
