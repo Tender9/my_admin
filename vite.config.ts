@@ -6,9 +6,11 @@ import { viteMockServe } from "vite-plugin-mock";
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 
+import { visualizer } from "rollup-plugin-visualizer";
+
 // https://vite.dev/config/
 export default defineConfig({
-   base: "./", // 静态资源基础路径（解决路径错误的核心
+   base: process.env.NODE_ENV == "production" ? "/my_admin/" : "/",
    plugins: [
       vue(),
       viteMockServe({
@@ -27,6 +29,7 @@ export default defineConfig({
             }),
          ],
       }),
+      visualizer({ open: true }),
    ],
    resolve: {
       alias: {
