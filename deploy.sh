@@ -1,24 +1,31 @@
 #!/usr/bin/env sh
 
-set -e  # 任何命令失败时立即退出脚本
+set -e
 
 echo "===== 提交源代码 ====="
 git add .
-git commit -m "update" || { echo "提交源代码失败，终止执行"; exit 1; }
-git push -f https://github.com/Tender9/my_admin.git master || { echo "推送源代码失败，终止执行"; exit 1; }
+# 检查是否有 staged 变更
+if ! git diff --cached --quiet; then
+  git commit -m "update"
+  git push -f https://github.com/Tender9/my_admin.git master
+else
+  echo "无源代码变更，跳过提交"
+fi
 
 echo "===== 开始构建项目 ====="
-npm run build || { echo "构建失败，终止执行"; exit 1; }
+npm run build
 
 echo "===== 部署构建结果 ====="
-cd dist || { echo "进入dist目录失败，终止执行"; exit 1; }
+cd dist
 
+# 初始化新仓库并推送到 root-pages 分支
 git init
+git remote add origin https://github.com/Tender9/my_admin.git
 git add -A
-git commit -m 'update' || { echo "提交dist失败，终止执行"; exit 1; }
-git push -f https://github.com/Tender9/my_admin.git master:root-pages || { echo "推送dist失败，终止执行"; exit 1; }
+git -c user.name="Deploy Bot" -c user.email="bot@example.com" commit -m 'update'
+git push -f origin master:root-pages
 
-cd - || exit 1
+cd - > /dev/null
 
 echo "===== 清理临时文件 ====="
 rm -rf dist
