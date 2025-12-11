@@ -8,13 +8,14 @@ import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 
 // https://vite.dev/config/
 export default defineConfig({
+   base: "./", // 静态资源基础路径（解决路径错误的核心
    plugins: [
       vue(),
       viteMockServe({
          mockPath: "./mock",
          supportTs: false,
-         localEnabled: true,//是否启用本地模拟数据
-         prodEnabled: true,//是否启用生产环境模拟数据
+         localEnabled: true, //是否启用本地模拟数据
+         prodEnabled: true, //是否启用生产环境模拟数据
          watchFiles: true,
          // 生产环境下必须配置
          injectCode: ` import { setupProdMockServer } from '../mock/mockProdServer'; setupProdMockServer(); `,

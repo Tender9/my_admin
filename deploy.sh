@@ -30,3 +30,5 @@ echo "===== 清理临时文件 ====="
 rm -rf "$DIST_DIR"
 
 echo "===== 所有操作完成 ====="
+
+# 项目地址 https://tender9.github.io/my_admin/
