@@ -17,14 +17,6 @@ const router = createRouter({
    routes,
 });
 
-const createRoutes = (menuList: any[]) => {
-   // menuList.forEach((route) => {
-   //    router.addRoute("layout", route);
-   // });
-   // // 获取全部路由
-   // console.log("router", router.options.routes);
-};
-
 router.beforeEach((to, _from, next) => {
    document.title = (to?.meta?.title as string) || "未命名标题";
    // const userStore = useUserStore();
