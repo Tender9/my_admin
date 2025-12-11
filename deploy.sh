@@ -22,8 +22,8 @@ cd dist
 git init
 git remote add origin https://github.com/Tender9/my_admin.git
 git add -A
-git -c user.name="Deploy Bot" -c user.email="bot@example.com" commit -m 'update'
-git push -f origin master:root-pages
+git -c user.name="Tender9" -c user.email="1505113506@qq.com" commit -m 'update'
+git push -f origin master:root-pages || { echo "推送dist失败，终止执行"; exit 1; }
 
 cd - > /dev/null
 
@@ -31,3 +31,6 @@ echo "===== 清理临时文件 ====="
 rm -rf dist
 
 echo "===== 所有操作完成 ====="
+
+
+# 项目地址 https://tender9.github.io/my_admin/
